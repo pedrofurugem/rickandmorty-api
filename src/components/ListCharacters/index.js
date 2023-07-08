@@ -61,19 +61,21 @@ export const ListCharacter = () => {
     return(
         <>
         <ImgLogo src={Logo} alt=""/>
-        {
-            character.map((char, index)=> {
-                return(
-                    <div key={index}>
-                        <img src={char.image} alt=""/> 
-                        <p>name: {char.name}</p>
-                        <p>species:{char.species}</p>
-                        <p>status:{char.status}</p>
-                        <p>type:{char.type}</p>
-                    </div>
-                )
-            })
-        }
+            <CardArea>
+                {
+                    character.map((char, index)=> {
+                        return(
+                            <Card key={index}>
+                                <CardImage src={char.image} alt=""/>
+                                <p><span>name: </span>{char.name}</p>
+                                <p><span>species: </span>{char.species}</p>
+                                <p><span>status: </span>{char.status}</p>
+                                <p><span>type: </span>{char.type}</p>
+                            </Card>
+                        )
+                    })
+                }
+            </CardArea>
         <PaginationArea>
             <Pagination 
             nextPage={nextPageUrl ? nextPage : null}
@@ -96,5 +98,30 @@ const PaginationArea = styled.div`
     justify-content: center;
 `
 
-/*   
-*/
+const CardArea = styled.div`
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+   
+`
+
+const Card = styled.div`
+   background-color: #3e4444;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   width: 350px;
+   border-radius: 25px;
+   margin: 5px
+`
+
+const CardImage = styled.img`
+   border-radius: 50%;
+   width: 200px;
+   margin-top: 15px;
+   border: 5px solid #82b74b;
+`
+
+//https://www.w3schools.com/colors/colors_palettes.asp

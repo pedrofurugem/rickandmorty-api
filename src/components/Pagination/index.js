@@ -1,13 +1,29 @@
+import styled from 'styled-components'
+
 export const Pagination =({nextPage, prevPage, goToPage, pages}) => {
     let pageButtons = []
     for(let i = 0; i < pages; i++){
-        pageButtons.push(<button key={i} onClick={ ()=> goToPage(i)}>{i}</button>)
+        pageButtons.push(<PageButtons key={i} onClick={ ()=> goToPage(i)}>{i}</PageButtons>)
     }
     return(
         <div>
-            {prevPage && <button onClick={prevPage}>Previous</button>}
+            {prevPage && <PrevPage onClick={prevPage}>Previous</PrevPage>}
             {pageButtons}
-            {nextPage && <button onClick={nextPage}>Next </button>}
+            {nextPage && <NextPage onClick={nextPage}>Next </NextPage>}
         </div>
     )
 }
+
+const PageButtons = styled.button`
+   margin: 3px;
+   width: 35px;
+   border-radius: 10px;
+`
+
+const PrevPage = styled.button`
+
+`
+
+const NextPage = styled.button`
+
+`

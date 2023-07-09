@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
+import {ThemeContext} from '../../Context-api/index'
 import { Pagination } from '../Pagination/index'
 import { getCharacter } from '../../services/service'
 import styled from 'styled-components'
@@ -13,6 +15,7 @@ Show()
 
 
 export const ListCharacter = () => {
+    const {themes} = useContext(ThemeContext)
     const [character, setCharacter] = useState([])
     const [loading, setLoading] = useState(true)
     const [nextPageUrl, setNextPageUrl] = useState()
@@ -67,10 +70,10 @@ export const ListCharacter = () => {
                         return(
                             <Card key={index}>
                                 <CardImage src={char.image} alt=""/>
-                                <p><span>name: </span>{char.name}</p>
-                                <p><span>species: </span>{char.species}</p>
-                                <p><span>status: </span>{char.status}</p>
-                                <p><span>type: </span>{char.type}</p>
+                                <Description><Span>name: </Span>{char.name}</Description>
+                                <Description><Span>species: </Span>{char.species}</Description>
+                                <Description><Span>status: </Span>{char.status}</Description>
+                                <Description><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</Description>
                             </Card>
                         )
                     })
@@ -90,6 +93,7 @@ export const ListCharacter = () => {
 
 const ImgLogo = styled.img`
     width: 400px;
+    margin-left: 100px;
 `
 
 const PaginationArea = styled.div`
@@ -107,14 +111,15 @@ const CardArea = styled.div`
 `
 
 const Card = styled.div`
-   background-color: #3e4444;
+   background-color: #3b3a30;
    display: flex;
    align-items: center;
    justify-content: center;
    flex-direction: column;
    width: 350px;
    border-radius: 25px;
-   margin: 5px
+   margin: 10px;
+   text-align: center;
 `
 
 const CardImage = styled.img`
@@ -122,6 +127,17 @@ const CardImage = styled.img`
    width: 200px;
    margin-top: 15px;
    border: 5px solid #82b74b;
+`
+
+const Description = styled.p`
+   color: #FFFFFF;
+   font-size: 18px;
+`
+
+const Span = styled.span`
+   font-weight: bold;
+   color: #FFFFFF;
+   font-size: 20px
 `
 
 //https://www.w3schools.com/colors/colors_palettes.asp

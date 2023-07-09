@@ -21,9 +21,9 @@ const PageButtons = styled.button`
 `
 
 const PrevPage = styled.button`
-
+   border-radius: 10px;
 `
 
 const NextPage = styled.button`
-
+   border-radius: 10px;
 `

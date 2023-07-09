@@ -1,10 +1,15 @@
 import './App.css';
-import { ListCharacter } from './components/ListCharacters/index'
+import {ListCharacter} from './components/ListCharacters/index'
+import {ThemeProvider} from './Context-api/index'
+import {ThemeTogglerButton} from './components/Themetogglerbutton'
 
 function App() {
   return (
     <>
-      <ListCharacter/>
+      <ThemeProvider>
+        <ThemeTogglerButton/>
+        <ListCharacter/>
+      </ThemeProvider>
     </>
   );
 }

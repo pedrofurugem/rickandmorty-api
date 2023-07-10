@@ -1,29 +1,25 @@
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
 
 export const themes = {
-    backGrounDark: {
-        background: '#3b3a30',
-        color: '#eeeeee'
+    dark: {
+        background: '#3b3a30', //escuro
+        Card: '#f0f0f0',    
+        fontColor: '#000000',      //claro      
     },
-    backGroundLight: {
+    light: {
         background: '#f0f0f0',
-        color: '#000000'
+        Card: '#3b3a30', 
+        fontColor: '#eeeeee'
     },
-    cardDark: {
-        background: '#3b3a30',
-        color: '#eeeeee'
-    },
-    cardLight: {
-        background: '#f0f0f0',
-        color: '#000000'
-    }
 }
 
 export const ThemeContext = createContext({})
 
 export const ThemeProvider = (props)=> {
+    const [theme, setTheme] = useState(themes.light)
+
     return(
-        <ThemeContext.Provider value={{themes}}>
+        <ThemeContext.Provider value={{theme, setTheme}}>
             {props.children}
         </ThemeContext.Provider>
     )

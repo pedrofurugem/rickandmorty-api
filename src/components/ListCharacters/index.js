@@ -15,7 +15,7 @@ Show()
 
 
 export const ListCharacter = () => {
-    const {themes} = useContext(ThemeContext)
+    const {theme} = useContext(ThemeContext)
     const [character, setCharacter] = useState([])
     const [loading, setLoading] = useState(true)
     const [nextPageUrl, setNextPageUrl] = useState()
@@ -62,32 +62,32 @@ export const ListCharacter = () => {
     if(loading) return "Loading..."
 
     return(
-        <>
-        <ImgLogo src={Logo} alt=""/>
-            <CardArea>
-                {
-                    character.map((char, index)=> {
-                        return(
-                            <Card key={index}>
-                                <CardImage src={char.image} alt=""/>
-                                <Description><Span>name: </Span>{char.name}</Description>
-                                <Description><Span>species: </Span>{char.species}</Description>
-                                <Description><Span>status: </Span>{char.status}</Description>
-                                <Description><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</Description>
-                            </Card>
-                        )
-                    })
-                }
-            </CardArea>
-        <PaginationArea>
-            <Pagination 
-            nextPage={nextPageUrl ? nextPage : null}
-            prevPage={prevPageUrl ? prevPage : null}
-            goToPage={goToPage}
-            pages={pages}
-            />
-        </PaginationArea>
-        </>
+        <main style={{backgroundColor: theme.background}}>
+            <ImgLogo src={Logo} alt=""/>
+                <CardArea>
+                    {
+                        character.map((char, index)=> {
+                            return(
+                                <Card key={index} style={{backgroundColor: theme.Card, color: theme.fontColor}}>
+                                    <CardImage src={char.image} alt=""/>
+                                    <P><Span>name: </Span>{char.name}</P>
+                                    <P><Span>species: </Span>{char.species}</P>
+                                    <P><Span>status: </Span>{char.status}</P>
+                                    <P><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</P>
+                                </Card>
+                            )
+                        })
+                    }
+                </CardArea>
+            <PaginationArea>
+                <Pagination 
+                nextPage={nextPageUrl ? nextPage : null}
+                prevPage={prevPageUrl ? prevPage : null}
+                goToPage={goToPage}
+                pages={pages}
+                />
+            </PaginationArea>
+        </main>
     )
 }
 
@@ -129,14 +129,12 @@ const CardImage = styled.img`
    border: 5px solid #82b74b;
 `
 
-const Description = styled.p`
-   color: #FFFFFF;
+const P = styled.p`
    font-size: 18px;
 `
 
 const Span = styled.span`
    font-weight: bold;
-   color: #FFFFFF;
    font-size: 20px
 `
 

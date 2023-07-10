@@ -1,4 +1,4 @@
-<h1>Rick and Morty-Api Projeto pessoal</h1>
+<h1>rickandmorty-api Projeto pessoal</h1>
 
 <div>
 <h2>Sobre o projeto</h2>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import React, { useContext } from 'react'
-import {ThemeContext} from '../../Context-api/index'
+import { ThemeContext } from '../../Context-api/index'
 import { Pagination } from '../Pagination/index'
 import { getCharacter } from '../../services/service'
+import { SearchCharacter } from '../SearchCharacter/index'
 import styled from 'styled-components'
 import Logo from '../images/Rick-And-Morty-Logo.png'
 
@@ -13,7 +14,6 @@ async function Show(){
 }
 Show()
 
-
 export const ListCharacter = () => {
     const {theme} = useContext(ThemeContext)
     const [character, setCharacter] = useState([])
@@ -21,6 +21,7 @@ export const ListCharacter = () => {
     const [nextPageUrl, setNextPageUrl] = useState()
     const [prevPageUrl, prevNextPageUrl] = useState()
     const [pages, setPages] = useState()
+    const [searchResults, setSearchResults] = useState([])
 
     useEffect(()=> {
         setLoading(true)
@@ -44,6 +45,14 @@ export const ListCharacter = () => {
         setPages(data.info.pages)
     }
 
+    const searchCharacter = async (name) => {
+        setLoading(true);
+        const response = await fetch(`https://rickandmortyapi.com/api/character?name=${name}`)
+        const data = await response.json();
+        setSearchResults(data.results)
+        setLoading(false);
+    }
+
     function nextPage(){
         fetchPage(nextPageUrl)
     }
@@ -57,26 +66,39 @@ export const ListCharacter = () => {
         fetchPage(url);
     }
 
-    
-
     if(loading) return "Loading..."
 
     return(
         <main style={{backgroundColor: theme.background}}>
             <ImgLogo src={Logo} alt=""/>
+              <SearchCharacter onSearch={searchCharacter}/>
                 <CardArea>
                     {
-                        character.map((char, index)=> {
-                            return(
-                                <Card key={index} style={{backgroundColor: theme.Card, color: theme.fontColor}}>
-                                    <CardImage src={char.image} alt=""/>
-                                    <P><Span>name: </Span>{char.name}</P>
-                                    <P><Span>species: </Span>{char.species}</P>
-                                    <P><Span>status: </Span>{char.status}</P>
-                                    <P><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</P>
-                                </Card>
-                            )
-                        })
+                        searchResults.length > 0 ? (
+                            searchResults.map((char, index)=> {
+                                return(
+                                    <Card key={index} style={{backgroundColor: theme.Card, color: theme.fontColor}}>
+                                        <CardImage src={char.image} alt=""/>
+                                        <P><Span>name: </Span>{char.name}</P>
+                                        <P><Span>species: </Span>{char.species}</P>
+                                        <P><Span>status: </Span>{char.status}</P>
+                                        <P><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</P>
+                                    </Card>
+                                )
+                            })
+                            ) : (
+                            character.map((char, index)=> {
+                                return(
+                                    <Card key={index} style={{backgroundColor: theme.Card, color: theme.fontColor}}>
+                                        <CardImage src={char.image} alt=""/>
+                                        <P><Span>name: </Span>{char.name}</P>
+                                        <P><Span>species: </Span>{char.species}</P>
+                                        <P><Span>status: </Span>{char.status}</P>
+                                        <P><Span>type: </Span>{char.type === '' ? 'undefined' : char.type}</P>
+                                    </Card>
+                                )
+                            })
+                        )
                     }
                 </CardArea>
             <PaginationArea>

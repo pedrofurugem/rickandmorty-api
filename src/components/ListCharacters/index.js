@@ -22,6 +22,7 @@ export const ListCharacter = () => {
     const [prevPageUrl, prevNextPageUrl] = useState()
     const [pages, setPages] = useState()
     const [searchResults, setSearchResults] = useState([])
+    const [error, setError] = useState(null)
 
     useEffect(()=> {
         setLoading(true)
@@ -49,7 +50,12 @@ export const ListCharacter = () => {
         setLoading(true);
         const response = await fetch(`https://rickandmortyapi.com/api/character?name=${name}`)
         const data = await response.json();
-        setSearchResults(data.results)
+        if(data.results.length === 0){
+           setError('No characters found')
+           setSearchResults([])
+        }else{
+           setSearchResults(data.results)
+        }
         setLoading(false);
     }
 
@@ -66,14 +72,18 @@ export const ListCharacter = () => {
         fetchPage(url);
     }
 
-    if(loading) return "Loading..."
+    const ErrorMessage = ({ message }) => {
+        return <div style={{ color: 'red' }}>{message}</div>;
+      };
 
+    if(loading) return "Loading..."
+//
     return(
         <main style={{backgroundColor: theme.background}}>
             <ImgLogo src={Logo} alt=""/>
               <SearchCharacter onSearch={searchCharacter}/>
                 <CardArea>
-                    {
+                    { error ? (<ErrorMessage>{error}</ErrorMessage>) :
                         searchResults.length > 0 ? (
                             searchResults.map((char, index)=> {
                                 return(

@@ -50,9 +50,13 @@ export const ListCharacter = () => {
         setLoading(true);
         const response = await fetch(`https://rickandmortyapi.com/api/character?name=${name}`)
         const data = await response.json();
-        if(data.results.length === 0){
-           setError('No characters found')
-           setSearchResults([])
+        if(!data.results){
+            setError("No characters found whit that name");
+            setSearchResults([]);
+        }
+        else if(data.results.length === 0){
+           setError("No characters found");
+           setSearchResults([]);
         }else{
            setSearchResults(data.results)
         }
@@ -83,8 +87,9 @@ export const ListCharacter = () => {
             <ImgLogo src={Logo} alt=""/>
               <SearchCharacter onSearch={searchCharacter}/>
                 <CardArea>
-                    { error ? (<ErrorMessage>{error}</ErrorMessage>) :
-                        searchResults.length > 0 ? (
+                    {  error ? (
+                        <ErrorMessage message={error}/>
+                    ) : searchResults && searchResults.length > 0 ? (
                             searchResults.map((char, index)=> {
                                 return(
                                     <Card key={index} style={{backgroundColor: theme.Card, color: theme.fontColor}}>

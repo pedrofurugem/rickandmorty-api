@@ -1,20 +1,35 @@
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import styled from 'styled-components'
 
 export const SearchCharacter = ({ onSearch })=> {
-    const [searchCharacter, setSearchCharacter] = useState('')
+    //const [searchCharacter, setSearchCharacter] = useState('')
+    const [inputValue, setInputValue] = useState('')
+
+    useEffect(()=> {
+        const handleKeyPress = (event) => {
+            if(event.key === 'Enter'){
+                handleSearch()
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress)
+
+        return ()=> {
+            document.removeEventListener('keydown', handleKeyPress)
+        }
+    })
 
     const handleInputChange = (event)=> {
-        setSearchCharacter(event.target.value)
+        setInputValue(event.target.value)
     }
 
     const handleSearch = ()=> {
-        onSearch(searchCharacter)
+        onSearch(inputValue)  
     }
 
     return(
         <SearchArea>
-          <Input type="text" value={searchCharacter} onChange={handleInputChange} placeholder="Search character by name"/>
+          <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="Search character by name"/>
           <BtnSearch onClick={handleSearch}>Search</BtnSearch>
         </SearchArea>
     )

@@ -2,12 +2,12 @@ import React, { createContext, useState } from 'react'
 
 export const themes = {
     dark: {
-        background: '#3b3a30', //escuro
-        Card: '#f0f0f0',    
-        fontColor: '#000000',      //claro      
+        background: '#3b3a30', 
+        Card: '#e3e0cc',    
+        fontColor: '#000000',          
     },
     light: {
-        background: '#f0f0f0',
+        background: '#e3e0cc',
         Card: '#3b3a30', 
         fontColor: '#eeeeee'
     },

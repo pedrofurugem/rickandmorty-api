@@ -3,7 +3,7 @@
 <div>
 <h2>Sobre o projeto</h2>
     <p>Requisição api e paginação </p>
-    <p>Apresentar todos os personagens do universo do desenho animado Rick and Morty</p>
+    <p>Apresentar e buscar por todos os personagens do universo do desenho animado Rick and Morty</p>
 </div>
 
 <div>
@@ -11,6 +11,7 @@
     <p>Este projeto busca mostrar todos os personagem do universo do desenho animado Rick and Morty</p>
     <p>Os personagens e suas informções são consumidas pela api pública rickandmortyapi</p>
     <p>Os cards contém a foto, nome, espécie, tipo e status</p>
+    <p>A cima dos cards temos um inpu de busca de personagens por nome</p>
     <p>No campo abaixo contém os botões para guiar o usuário nas páginas, cada uma contendo 20 personagens</p>
     <p>mudar a cor tema da aplicação; no canto superior esquerdo há um botão theme, o usuário pode alterar para claro ou escuro, feito por Context-api</p>
 </div>

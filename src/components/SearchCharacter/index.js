@@ -46,7 +46,7 @@ const Input = styled.input`
     width: 300px;
     padding: 10px;
     border-radius: 15px;
-    @media (max-width: 768px) {
+    @media(max-width: 768px) {
       width: 200px;
       padding: 8px;
    }
@@ -59,7 +59,7 @@ const BtnSearch = styled.button`
    font-weight: bold;
    color: #FFF;
    background-color: #B2DF28;
-   @media (max-width: 768px) {
+   @media(max-width: 768px) {
       padding: 8px;
    }
 `

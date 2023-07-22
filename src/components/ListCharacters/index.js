@@ -131,6 +131,10 @@ export const ListCharacter = () => {
 const ImgLogo = styled.img`
     width: 400px;
     margin-left: 100px;
+    @media (max-width: 768px) {
+      width: 250px;
+      margin: 0;
+   }
 `
 
 const PaginationArea = styled.div`
@@ -144,7 +148,6 @@ const CardArea = styled.div`
    flex-wrap: wrap;
    align-items: center;
    justify-content: center;
-   
 `
 
 const Card = styled.div`
@@ -157,6 +160,9 @@ const Card = styled.div`
    border-radius: 25px;
    margin: 10px;
    text-align: center;
+   @media (max-width: 768px) {
+    width: 250px
+   }
 `
 
 const CardImage = styled.img`
@@ -164,15 +170,24 @@ const CardImage = styled.img`
    width: 200px;
    margin-top: 15px;
    border: 5px solid #82b74b;
+   @media (max-width: 768px) {
+    width: 150px
+   }
 `
 
 const P = styled.p`
    font-size: 18px;
+   @media (max-width: 768px) {
+    font-size: 15px
+   }
 `
 
 const Span = styled.span`
    font-weight: bold;
-   font-size: 20px
+   font-size: 20px;
+   @media (max-width: 768px) {
+    font-size: 18px
+   }
 `
 
 //https://www.w3schools.com/colors/colors_palettes.asp
